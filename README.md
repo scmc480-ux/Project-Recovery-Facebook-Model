@@ -1,5 +1,9 @@
 # Project Recovery
 
+*Building tomorrow's recovery framework, one module at a time.*
+
+---
+
 Project Recovery is a modular recovery engine for turning export archives into
 source-defensible, normalized outputs.
 
@@ -126,3 +130,29 @@ python scripts/run_facebook_reader.py `
 ```
 
 See `CONTRIBUTING.md` and `SECURITY.md` before adding examples or public data.
+
+---
+
+# Project Ecosystem
+
+### Project Recovery
+
+*Building tomorrow's recovery framework, one module at a time.*
+
+https://github.com/scmc480-ux/Project-Recovery
+
+---
+
+### Project Symphony
+
+*One Vision. Infinite Perspectives.*
+
+https://github.com/scmc480-ux/Project-Symphony
+
+---
+
+### Project Orchestra
+
+*Become the Conductor. Orchestrate Intelligence.*
+
+https://github.com/scmc480-ux/Project-Orchestra
