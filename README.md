@@ -1,6 +1,6 @@
 # Project Recovery
 
-*Building tomorrow's recovery framework, one module at a time.*
+<sub><em>Building tomorrow's recovery framework, one module at a time.</em></sub>
 
 ---
 
@@ -137,7 +137,7 @@ See `CONTRIBUTING.md` and `SECURITY.md` before adding examples or public data.
 
 ### Project Recovery
 
-*Building tomorrow's recovery framework, one module at a time.*
+<sub><em>Building tomorrow's recovery framework, one module at a time.</em></sub>
 
 https://github.com/scmc480-ux/Project-Recovery
 
@@ -145,7 +145,7 @@ https://github.com/scmc480-ux/Project-Recovery
 
 ### Project Symphony
 
-*One Vision. Infinite Perspectives.*
+<sub><em>One Vision. Infinite Perspectives.</em></sub>
 
 https://github.com/scmc480-ux/Project-Symphony
 
@@ -153,6 +153,6 @@ https://github.com/scmc480-ux/Project-Symphony
 
 ### Project Orchestra
 
-*Become the Conductor. Orchestrate Intelligence.*
+<sub><em>Become the Conductor. Orchestrate Intelligence.</em></sub>
 
 https://github.com/scmc480-ux/Project-Orchestra
