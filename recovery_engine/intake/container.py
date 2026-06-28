@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
-import zipfile
 
-from recovery_engine.utils.hashing import sha256_bytes, sha256_file, sha256_text
+from recovery_engine.utils.hashing import sha256_bytes, sha256_file
 
 
 @dataclass(frozen=True)
@@ -15,56 +15,54 @@ class SourceFile:
 
 
 class SourceContainer:
+    """Read a source folder or zip without changing the caller's export."""
+
     def __init__(self, source: Path):
         self.source = Path(source)
-        self._inventory: list[SourceFile] | None = None
-        if self.source.is_dir():
-            self._kind = "directory"
-        elif self.source.is_file() and self.source.suffix.lower() == ".zip":
-            self._kind = "zip"
-        else:
-            raise ValueError(f"Source must be a directory or .zip file: {self.source}")
+        if not self.source.exists():
+            raise FileNotFoundError(f"Source not found: {self.source}")
+        self.is_zip = self.source.is_file() and self.source.suffix.lower() == ".zip"
 
     def iter_files(self) -> list[SourceFile]:
-        if self._inventory is not None:
-            return list(self._inventory)
+        if self.is_zip:
+            return self._iter_zip_files()
+        return self._iter_directory_files()
 
-        if self._kind == "directory":
-            inventory = [
-                SourceFile(
-                    path=path.relative_to(self.source).as_posix(),
-                    size=path.stat().st_size,
-                    sha256=sha256_file(path),
-                )
-                for path in sorted(self.source.rglob("*"))
-                if path.is_file()
-            ]
-        else:
+    def read_bytes(self, relative_path: str) -> bytes:
+        if self.is_zip:
             with zipfile.ZipFile(self.source) as archive:
-                inventory = [
-                    SourceFile(
-                        path=info.filename,
-                        size=info.file_size,
-                        sha256=sha256_bytes(archive.read(info.filename)),
-                    )
-                    for info in archive.infolist()
-                    if not info.is_dir()
-                ]
+                return archive.read(relative_path)
+        return (self.source / relative_path).read_bytes()
 
-        self._inventory = inventory
-        return list(inventory)
-
-    def read_bytes(self, path: str) -> bytes:
-        if self._kind == "directory":
-            return (self.source / path).read_bytes()
-
-        normalized = path.replace("\\", "/")
-        with zipfile.ZipFile(self.source) as archive:
-            return archive.read(normalized)
-
-    def read_text(self, path: str) -> str:
-        return self.read_bytes(path).decode("utf-8", errors="replace")
+    def read_text(self, relative_path: str) -> str:
+        data = self.read_bytes(relative_path)
+        for encoding in ("utf-8", "utf-8-sig", "latin-1"):
+            try:
+                return data.decode(encoding)
+            except UnicodeDecodeError:
+                continue
+        return data.decode("utf-8", errors="replace")
 
     def fingerprint(self) -> str:
-        lines = [f"{item.path}|{item.size}|{item.sha256}" for item in self.iter_files()]
-        return sha256_text("\n".join(lines))
+        rows = [f"{item.path}|{item.size}|{item.sha256}" for item in self.iter_files()]
+        return sha256_bytes("\n".join(sorted(rows)).encode("utf-8"))
+
+    def _iter_directory_files(self) -> list[SourceFile]:
+        root = self.source.resolve()
+        files: list[SourceFile] = []
+        for path in sorted(root.rglob("*")):
+            if not path.is_file():
+                continue
+            rel = path.relative_to(root).as_posix()
+            files.append(SourceFile(path=rel, size=path.stat().st_size, sha256=sha256_file(path)))
+        return files
+
+    def _iter_zip_files(self) -> list[SourceFile]:
+        files: list[SourceFile] = []
+        with zipfile.ZipFile(self.source) as archive:
+            for info in sorted(archive.infolist(), key=lambda item: item.filename):
+                if info.is_dir():
+                    continue
+                data = archive.read(info.filename)
+                files.append(SourceFile(path=info.filename, size=len(data), sha256=sha256_bytes(data)))
+        return files
