@@ -1,0 +1,30 @@
+{
+  "participants": [
+    {
+      "name": "PERSON_001"
+    },
+    {
+      "name": "PERSON_002"
+    }
+  ],
+  "title": "THREAD_0001",
+  "messages": [
+    {
+      "sender_name": "PERSON_002",
+      "timestamp_ms": 1711929600000,
+      "content": "Synthetic message body 001.",
+      "type": "Generic"
+    },
+    {
+      "sender_name": "PERSON_001",
+      "timestamp_ms": 1711933200000,
+      "content": "Synthetic message body 002.",
+      "type": "Generic",
+      "photos": [
+        {
+          "uri": "messages/inbox/thread_0001/photos/media_0001.jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-recovery"
+version = "1.0.0"
+description = "A modular recovery engine with Facebook Reader v1."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Project Recovery contributors" }
+]
+keywords = ["forensics", "recovery", "facebook", "data-export", "normalization"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Utilities"
+]
+
+[project.scripts]
+project-recovery = "recovery_engine.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["recovery_engine*"]

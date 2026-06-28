@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Runtime outputs
+outputs/
+tmp/
+
+# Private forensic material - never publish
+jobs/
+intake/
+workspace/
+CHECKPOINTS/
+release/
+*.zip
+*.7z
+*.rar
+*.local.json
+.env
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
