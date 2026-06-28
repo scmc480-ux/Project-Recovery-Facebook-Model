@@ -78,6 +78,17 @@ DERIVED is interpretation or structure.
 DERIVED must point back to MASTER.
 ```
 
+## Governing Rules
+
+Project Recovery follows this mission:
+
+```text
+Build the core for universality; build the modules for specificity.
+```
+
+Facebook Reader v1 is the first public reference specialization. See
+`docs/GOVERNING_RULES.md` for the full governing rules.
+
 ## Privacy Boundary
 
 The repository is designed to be safe for public development:

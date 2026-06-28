@@ -29,6 +29,8 @@ scripts/               public helper scripts
 tests/                 clean-clone verification
 ```
 
+See `GOVERNING_RULES.md` for the core/module boundary and mission statement.
+
 ## Private Workspace Mapping
 
 The private development workspace may contain folders such as `jobs/`,

@@ -1,6 +1,8 @@
 # Facebook Reader v1
 
 Facebook Reader v1 is the only data source included in the public 1.0 release.
+It is the first reference specialization for the Project Recovery core, not a
+one-off endpoint.
 
 ## Supported Inputs
 

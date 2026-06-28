@@ -11,3 +11,4 @@ Before publishing Project Recovery Facebook Reader v1:
 - Confirm generated outputs are not committed.
 - Confirm the README and QUICKSTART commands work from a clean clone.
 - Confirm the package can run with only the Python standard library.
+- Confirm `docs/GOVERNING_RULES.md` still matches the release scope.
