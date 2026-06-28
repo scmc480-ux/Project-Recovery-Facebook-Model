@@ -12,15 +12,15 @@ dist/
 *.egg-info/
 
 # Runtime outputs
-outputs/
-tmp/
+/outputs/
+/tmp/
 
 # Private forensic material - never publish
-jobs/
-intake/
-workspace/
-CHECKPOINTS/
-release/
+/jobs/
+/intake/
+/workspace/
+/CHECKPOINTS/
+/release/
 *.zip
 *.7z
 *.rar
