@@ -17,7 +17,7 @@ tmp/
 
 # Private forensic material - never publish
 jobs/
-intake/
+/intake/
 workspace/
 CHECKPOINTS/
 release/
